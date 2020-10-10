@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>musicPlayerByJs</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div id="main-div">
+		<div id="player-body">
+			<div id="title-body">
+				<h1>better</h1>
+				<h4>zayn malik</h4>
+			</div>
+			<div id="img-body">
+				<img src="zayn.jpg" alt="photo" id="img">
+			</div>
+			<audio src="better.mp3" type="mp3" id="audio"></audio>
+			
+
+			
+
+			<div id="controls">
+				<i class="fa fa-backward" id="back"></i>
+				<i class="fa fa-play" id="play"></i>
+				<i class="fa fa-forward" id="next"></i>
+			</div>
+			<div id="creater">
+				<span> <hr/></span>
+				<h3>! SKcre8 !</h3>
+			    <span><hr/></span>
+			</div>
+		</div>
+	</div>
+
+	<!-- javascript-->
+
+	<script type="text/javascript">
+		        const play = document.querySelector('#play');
+		const img = document.querySelector('#img');
+		const music= document.querySelector('audio');
+		const next=document.querySelector('#next');
+		const prev= document.querySelector('#back');
+		const h1=document.querySelector('h1');
+		const h4=document.querySelector('h4');
+		let check=false;
+		length=0;
+
+		const data =[
+
+		{
+				name:"better",
+				singer:"zayn ",
+				ganna:"better"
+				
+			  },		
+		{
+          name:"addicted",
+		  singer:"enrique iglesias",
+		  ganna:"addicted"
+          
+		},
+		
+		  {
+			name:"never say never",
+			singer:"justin bieber",
+			ganna:"song"
+			
+		  }
+
+		];
+       
+        play.addEventListener('click',()=>{
+        if(check){
+		pauseMusic();
+		}
+		else{
+		playMusic();
+		}
+
+        });
+
+        const pauseMusic=()=>{
+			check=false;
+			music.pause();
+			play.classList.replace('fa-pause','fa-play');
+			img.classList.remove('animate');
+		};
+
+		
+		const playMusic=()=>{
+			check=true;
+			music.play();
+			play.classList.replace('fa-play', 'fa-pause' );
+			img.classList.add('animate');
+
+		};
+
+
+		const LoadSong=(data)=>{
+		 h1.textContent=data.name;
+		 h4.textContent=data.singer;
+		 music.src=`${data.ganna}.mp3`;
+		}
+		index=0;
+
+
+		const nextSong=()=>{
+			index=(index+1)%data.length;
+			LoadSong(data[index]);
+			playMusic();
+		};
+		const prevSong=()=>{
+			index=(index-1 + data.length)%data.length;
+		  LoadSong(data[index]);
+		  playMusic();
+		}
+		
+        next.addEventListener("click",nextSong);
+		prev.addEventListener("click",prevSong);
+	</script>
+
+</body>
+</html>
